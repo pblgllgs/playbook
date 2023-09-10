@@ -1,6 +1,6 @@
 ---
 - name: Install Java an net-tools
-  hosts: java-jre-17
+  hosts: java
   tasks:
     - name: update apt repo and cache
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
@@ -10,7 +10,7 @@
       apt: name=net-tools
       
 - name: Verify java running
-  hosts: java-jre-17
+  hosts: java
   tasks:
     - name: Ensure java is running with ps
       shell: ps aux | grep java
