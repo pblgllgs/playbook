@@ -3,6 +3,8 @@
   become: yes
   hosts: pblgllgs.info
   tasks:
+    - name: Install package python-docker
+      apt: name=python3-docker
       
     - name: Get info container
       docker_container_info:
