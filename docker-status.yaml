@@ -1,10 +1,10 @@
 ---
 - name: Status docker container
-  hosts: pblgllgs.info
+  hosts: java
   tasks:
     - name: Get infos on container
       docker_container_info:
-        name: my_container
+        name: portainer_agent
       register: result
 
     - name: Does container exist?
