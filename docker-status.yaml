@@ -1,11 +1,11 @@
 ---
 - name: Status docker container
   become: yes
-  hosts: java
+  hosts: pblgllgs.info
   tasks:
     - name: Get infos on container
       docker_container_info:
-        name: portainer_agent
+        name: portafolio-pblgllgs.info
       register: result
 
     - name: Does container exist?
