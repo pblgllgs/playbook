@@ -3,8 +3,8 @@
   become: yes
   hosts: java
   tasks:
-      - name: Install package python-docker
-        apt: name=python3-docker
+    - name: Install package python-docker
+      apt: name=python3-docker
       
     - name: Get infos on container
       docker_container_info:
