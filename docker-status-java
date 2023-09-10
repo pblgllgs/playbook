@@ -1,0 +1,18 @@
+---
+- name: Status docker container
+  become: yes
+  hosts: java
+  tasks:
+    - name: Get infos on container
+      docker_container_info:
+        name: portainer_agent
+      register: result
+
+    - name: Does container exist?
+      debug:
+        msg: "The container {{ 'exists' if result.exists else 'does not exist' }}"
+
+    - name: Print the status of the container
+      debug:
+        msg: "The container status is {{ result.container['State']['Status'] }}"
+      when: result.exists
