@@ -3,7 +3,8 @@
   become: yes
   hosts: pblgllgs.info
   tasks:
-    - name: Get infos on container
+      
+    - name: Get info container
       docker_container_info:
         name: portafolio-pblgllgs.info
       register: result
