@@ -1,5 +1,6 @@
 ---
 - name: Status docker container
+  become: yes
   hosts: java
   tasks:
     - name: Get infos on container
