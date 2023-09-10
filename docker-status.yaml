@@ -1,5 +1,5 @@
 ---
-- name: Install Java an net-tools
+- name: Status docker container
   hosts: pblgllgs.info
   tasks:
     - name: Get infos on container
