@@ -1,1 +1,51 @@
-
+---
+- hosts: webserver
+  become: true
+  tasks:
+  
+    - name: installa dipendenze
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      loop:
+        - apt-transport-https
+        - ca-certificates
+        - gnupg
+        - curl
+        - gnupg-agent
+        - software-properties-common
+        
+    - name: GPG
+        apt_key:
+          url: https://download.docker.com/linux/ubuntu/gpg
+          state: present
+          
+    - name: repository
+          apt_repository:
+            repo: deb https://download.docker.com/linux/ubuntu jammy stable
+            state: present
+            
+    - name: install docker
+      apt:
+        name: "{{item}}"
+        state: latest
+        update_cache: yes
+      loop:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+        
+    - name: ensure docker is started
+      service:
+        name: docker
+        state: started
+        enabled: yes
+        
+  handlers:
+    - name: restart docker
+      service: 
+        name: docker 
+        state: restarted
