@@ -13,6 +13,15 @@
       loop:
         - curl
         - software-properties-common
+        
+    - name: sign
+      ansible.builtin.command: apt-get install -y ca-certificates curl gnupg
+
+    - name: sign
+      ansible.builtin.command: mkdir -p /etc/apt/keyrings
+
+    - name: sign
+      ansible.builtin.command: apt-get install -y ca-certificates curl gnupg
 
     - name: Add NodeSource repository
       apt_repository:
