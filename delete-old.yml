@@ -3,6 +3,16 @@
   become: yes
   hosts: java
   tasks:
+  - name: Stop a container
+    docker_container:
+    name: app-ci-cd
+    state: stopped
+    
+  - name: remove container
+    docker_container:
+    name: app-ci-cd
+    state: absent
+    
   - name: Remove image
     docker_image:
       state: absent
