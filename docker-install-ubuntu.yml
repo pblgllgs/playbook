@@ -17,14 +17,14 @@
         - software-properties-common
         
     - name: GPG
-        apt_key:
-          url: https://download.docker.com/linux/ubuntu/gpg
-          state: present
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
           
     - name: repository
-          apt_repository:
-            repo: deb https://download.docker.com/linux/ubuntu jammy stable
-            state: present
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu jammy stable
+        state: present
             
     - name: install docker
       apt:
