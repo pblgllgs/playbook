@@ -43,6 +43,9 @@
         name: docker
         state: started
         enabled: yes
+
+    - name: add user to group docker
+      ansible.builtin.command: usermod -aG docker ${USER}
         
   handlers:
     - name: restart docker
