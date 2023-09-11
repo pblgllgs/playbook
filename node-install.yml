@@ -26,6 +26,9 @@
     - name: sign
       ansible.builtin.command: echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 
+    - name: Update apt cache
+      apt:
+        update_cache: yes
 
     - name: Add NodeSource repository
       apt_repository:
