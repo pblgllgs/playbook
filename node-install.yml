@@ -23,6 +23,10 @@
     - name: sign
       ansible.builtin.command: apt-get install -y ca-certificates curl gnupg
 
+    - name: sign
+      ansible.builtin.command: echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+
+
     - name: Add NodeSource repository
       apt_repository:
         repo: "deb https://deb.nodesource.com/node_18.x {{ ansible_distribution_release }} main"
