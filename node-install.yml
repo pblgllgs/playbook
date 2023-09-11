@@ -1,12 +1,22 @@
+---
 - hosts: webserver
+  gather_facts: yes
   become: yes
+  vars:
+    NODEJS_VERSION: "18"
   tasks:
-    - name: Update apt cache
-      apt:
+    - name: Install the gpg key for nodejs LTS
+      apt_key:
+        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+    
+    - name: Install the nodejs LTS repos
+      apt_repository:
+        repo: "deb https://deb.nodesource.com/node_{{ NODEJS_VERSION }}.x {{ ansible_distribution_release }} main"
+        state: present
         update_cache: yes
-        
-    - name: Install nvm
-      ansible.builtin.shell: >
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-      args:
-        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+    - name: Install the nodejs
+      apt:
+        name: nodejs
+        state: present
