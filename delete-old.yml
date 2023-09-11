@@ -12,12 +12,6 @@
       docker_container:
         name: app-ci-cd
         state: absent
-    
-    # - name: Remove image
-    #   docker_image:
-    #     state: absent
-    #     name: pblgllgs/api-ci-cd
-    #     tag: 1.0.0
 
     - name: Return motd to registered var
       ansible.builtin.command: docker image rm -f pblgllgs/app-ci-cd:1.0.0
