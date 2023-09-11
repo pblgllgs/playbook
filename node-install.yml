@@ -8,9 +8,12 @@
         
     - name: needed
       ansible.builtin.command: sudo apt-get install -y build-essential libssl-dev
+     - name: needed
+      ansible.builtin.command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+    
 
-    - name: Install nvm
-      ansible.builtin.shell: >
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-      args:
-        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+    # - name: Install nvm
+    #   ansible.builtin.shell: >
+    #     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+    #   args:
+    #     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
