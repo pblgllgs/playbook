@@ -6,43 +6,8 @@
       apt:
         update_cache: yes
 
-    - name: Install Node.js dependencies
-      apt:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - curl
-        - software-properties-common
-        
-    - name: sign
-      ansible.builtin.command: apt-get install -y ca-certificates curl gnupg
-
-    - name: sign
-      ansible.builtin.command: mkdir -p /etc/apt/keyrings
-
-    - name: sign
-      ansible.builtin.command: apt-get install -y ca-certificates curl gnupg
-
-    - name: sign
-      ansible.builtin.command: echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-
-    - name: Update apt cache
-      apt:
-        update_cache: yes
-
-    - name: Add NodeSource repository
-      apt_repository:
-        repo: "deb https://deb.nodesource.com/node_18.x {{ ansible_distribution_release }} main"
-        state: present
-        update_cache: yes
-        filename: nodesource
-
-    - name: Install Node.js
-      apt:
-        name: nodejs
-        state: present
-
-    - name: Install build-essential
-      apt:
-        name: build-essential
-        state: present
+    - name: Install nvm
+      ansible.builtin.shell: >
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+      args:
+        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
