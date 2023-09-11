@@ -3,18 +3,18 @@
   become: yes
   hosts: java
   tasks:
-  - name: Stop a container
-    docker_container:
-    name: app-ci-cd
-    state: stopped
+    - name: Stop a container
+      docker_container:
+        name: app-ci-cd
+        state: stopped
     
-  - name: remove container
-    docker_container:
-    name: app-ci-cd
-    state: absent
+    - name: remove container
+      docker_container:
+        name: app-ci-cd
+        state: absent
     
-  - name: Remove image
-    docker_image:
-      state: absent
-      name: pblgllgs/api-ci-cd
-      tag: 1.0.0
+    - name: Remove image
+      docker_image:
+        state: absent
+        name: pblgllgs/api-ci-cd
+        tag: 1.0.0
