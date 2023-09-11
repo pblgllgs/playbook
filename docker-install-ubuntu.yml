@@ -1,6 +1,9 @@
 ---
 - hosts: webserver
   become: true
+  vars:
+    docker_users:
+      - 'pblgllgs'
   tasks:
   
     - name: installa dipendenze
@@ -44,8 +47,13 @@
         state: started
         enabled: yes
 
-    - name: add user to group docker
-      ansible.builtin.command: usermod -aG docker ${USER}
+    - name: users | adding docker users (for use without sudo)
+      user:
+        name: "{{ item }}"
+        append: yes
+        groups: docker
+      become: true
+      with_items: '{{ docker_users }}'
         
   handlers:
     - name: restart docker
