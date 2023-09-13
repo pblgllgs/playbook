@@ -38,3 +38,6 @@
           - docker-compose-plugin
         state: latest
         update_cache: true
+
+    - name: add user
+      ansible.builtin.command: sudo usermod -aG docker pblgllgs
