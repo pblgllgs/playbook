@@ -1,5 +1,5 @@
 ---
-- hosts: webserver
+- hosts: jenkins
   become: true
   tasks:
   
