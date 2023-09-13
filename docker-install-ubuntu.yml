@@ -25,6 +25,9 @@
         state: present
         filename: docker
         
+    - name: fix
+      ansible.builtin.command: sudo cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d
+        
     - name: update apt repo and cache
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
