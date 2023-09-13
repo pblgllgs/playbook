@@ -1,7 +1,7 @@
 ---
 - name: Install Java an net-tools
   become: yes
-  hosts: java
+  hosts: jenkins
   tasks:
     - name: update apt repo and cache
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
