@@ -12,7 +12,7 @@
       
 - name: Verify java running
   become: yes
-  hosts: java
+  hosts: jenkins
   tasks:
     - name: Ensure java is running with ps
       shell: ps aux | grep java
