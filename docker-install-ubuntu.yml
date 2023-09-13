@@ -1,62 +1,28 @@
 ---
 - hosts: webserver
   become: true
-  vars:
-    docker_users:
-      - 'pblgllgs'
   tasks:
   
-    - name: installa dipendenze
-      apt:
-        name: "{{item}}"
-        state: present
-        update_cache: yes
-      loop:
-        - apt-transport-https
-        - ca-certificates
-        - gnupg
-        - curl
-        - gnupg-agent
-        - software-properties-common
-        
-    - name: GPG
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-          
-    - name: repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu jammy stable
-        state: present
-            
-    - name: install docker
-      apt:
-        name: "{{item}}"
-        state: latest
-        update_cache: yes
-      loop:
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
-        - docker-buildx-plugin
-        - docker-compose-plugin
-        
-    - name: ensure docker is started
-      service:
-        name: docker
-        state: started
-        enabled: yes
+    - name: delete old image
+      ansible.builtin.command: sudo apt-get update
 
-    - name: users | adding docker users (for use without sudo)
-      user:
-        name: "{{ item }}"
-        append: yes
-        groups: docker
-      become: true
-      with_items: '{{ docker_users }}'
-        
-  handlers:
-    - name: restart docker
-      service: 
-        name: docker 
-        state: restarted
+    - name: delete old image
+      ansible.builtin.command: sudo apt-get install ca-certificates curl gnupg
+
+    - name: delete old image
+      ansible.builtin.command: sudo install -m 0755 -d /etc/apt/keyrings
+
+    - name: delete old image
+      ansible.builtin.command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+    - name: delete old image
+      ansible.builtin.command: sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+    - name: delete old image
+      ansible.builtin.command: echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    - name: delete old image
+      ansible.builtin.command: sudo apt-get update
+
+    - name: delete old image
+      ansible.builtin.command: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
