@@ -1,6 +1,6 @@
 ---
 - name: install Docker
-  hosts: jenkins
+  hosts: test
   become: true
   tasks:
     - name: Install apt-transport-https
