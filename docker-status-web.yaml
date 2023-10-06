@@ -1,7 +1,7 @@
 ---
 - name: Status docker container
   become: yes
-  hosts: pblgllgs.info
+  hosts: webserver
   tasks:
     - name: Install package python-docker
       apt: name=python3-docker
