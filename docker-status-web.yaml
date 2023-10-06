@@ -8,7 +8,7 @@
       
     - name: Get info container
       docker_container_info:
-        name: portafolio-webserver
+        name: portafolio-pblgllgs.info
       register: result
 
     - name: Does container exist?
